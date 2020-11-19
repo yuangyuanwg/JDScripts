@@ -19,18 +19,17 @@ async function main() {
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
     const sendNotify = `await notify.sendNotify(\`\${$.name} - 账号\${$.index} - \${UserName} 可领取\`,
-    \`【京东账号\${$.index}】\${$.UserName}\n【提醒⏰】\${$.factoryInfo.data.result.factoryInfo.name}已可领取\n请去京东APP查看。\` +
+    \`【京东账号\${$.index}】\${$.UserName}\n【提醒⏰】商品：\${$.factoryInfo.data.result.factoryInfo.name} 库存：\${$.factoryInfo.data.result.factoryInfo.couponCount } 已可领取\n请去京东APP查看。\` +
     '当前电量⚡ :' + $.homeData.data.result.userScore + '  需要电量⚡ :' + $.factoryInfo.data.result.factoryInfo.totalScore);`;
-    const $o1 = '$.factoryInfo.data.result.factoryInfo.totalScore === $.homeData.data.result.userScore) {';
+    const $o1 = 'parseInt($.factoryInfo.data.result.factoryInfo.totalScore) <= parseInt($.homeData.data.result.userScore)) {';
     const $r1 = '$.factoryInfo.data.result.factoryInfo && (typeof $.factoryInfo.data.result.factoryInfo.couponCount === "number") && $.factoryInfo.data.result.factoryInfo.couponCount > 0 && ';
-    const $r2 = 'parseInt($.homeData.data.result.userScore) > parseInt($.factoryInfo.data.result.factoryInfo.totalScore)';
     $.body = $.body.replace(
-      $o1, $r1 + $r2 + `) {
+      $o1, $r1 + `$&
         if($.isNode()) ${sendNotify}
       `
     ).replace(
       'console.log(\'当前电量',
-      `if($.isNode() && ${$r1 + $r2} - 10000) {
+      `if($.isNode() && ${$r1 +  ' -10000 + ' + $o1}
         ${sendNotify}
       }
       $&`
