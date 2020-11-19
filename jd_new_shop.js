@@ -1,16 +1,17 @@
-// 东东工厂
-// Author: 799953468 https://github.com/799953468
-// 更新时间：2020-11-18 8:57
+/*
+新店福利
+Author: 799953468 https://github.com/799953468
+更新时间：2020-11-05 07:45
+[task_local]
+# 京东抽奖机
+2 0 * * * ./JD/jd_new_shop.js, tag=新店福利, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+*/
 
-// [task_local]
-// # 东东工厂
-// 0 */3 * * * ./JD/jd_factory.js, tag=东东工厂, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
-
-const $ = new Env('东东工厂');
+const $ = new Env('新店福利');
 const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/799953468/Quantumult-X@master/Scripts/JD/jd_factory.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/799953468/Quantumult-X@master/Scripts/JD/jd_new_shop.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -18,30 +19,10 @@ async function main() {
   await updateShareCodes();
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
-    const sendNotify = `await notify.sendNotify(\`\${$.name} - 账号\${$.index} - \${UserName} 可领取\`,
-    \`【京东账号\${$.index}】\${$.UserName}\n【提醒⏰】\${$.factoryInfo.data.result.factoryInfo.name}已可领取\n请去京东APP查看。\` +
-    '当前电量⚡ :' + $.homeData.data.result.userScore + '  需要电量⚡ :' + $.factoryInfo.data.result.factoryInfo.totalScore);`;
-    const $o1 = '$.factoryInfo.data.result.factoryInfo.totalScore === $.homeData.data.result.userScore) {';
-    const $r1 = '$.factoryInfo.data.result.factoryInfo && (typeof $.factoryInfo.data.result.factoryInfo.couponCount === "number") && $.factoryInfo.data.result.factoryInfo.couponCount > 0 && ';
-    const $r2 = 'parseInt($.homeData.data.result.userScore) > parseInt($.factoryInfo.data.result.factoryInfo.totalScore)';
-    $.body = $.body.replace(
-      $o1, $r1 + $r2 + `) {
-        if($.isNode()) ${sendNotify}
-      `
-    ).replace(
-      'console.log(\'当前电量',
-      `if($.isNode() && ${$r1 + $r2} - 10000) {
-        ${sendNotify}
-      }
-      $&`
-    ).replace(
-      /\$\.factoryInfo\.data\.result\.UserName/g,
-      '$.factoryInfo.data.result.userName'
-    ).replace('$.index = i + 1;', 'UserName = $.UserName;\n$&');
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_factory.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_new_shop.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -58,7 +39,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/799953468/Qua
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/799953468/Quantumult-X@master/Scripts/JD/jd_factory.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/799953468/Quantumult-X@master/Scripts/JD/jd_new_shop.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
