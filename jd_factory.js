@@ -39,7 +39,24 @@ async function main() {
     ).replace(
       /P04z54XCjVWnYaS5m9cZ2esjHVDlwcfuXNvEN4/g,
       'P04z54XCjVWnYaS5khRQiW7'
-    ).replace('$.index = i + 1;', 'UserName = $.UserName;\n$&');
+    ).replace('$.index = i + 1;', 'UserName = $.UserName;\n$&'
+    ).replace(
+      'async function share() {',
+      `async function share() {
+        console.log('----开始助力你的好友-----');
+        const rt = await __share();
+        try{
+          console.log(
+            '你的好友助力任务进度：' + 
+            $.homeData.data.result.taskVos[1].times + '/' +
+            $.homeData.data.result.taskVos[1].maxTimes + '\\n'
+          );
+        }catch(ex){}
+        return rt;
+      }
+
+      async function __share() {`
+    );
     eval($.body);
   }
 }
