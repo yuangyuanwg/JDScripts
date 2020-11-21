@@ -36,6 +36,9 @@ async function main() {
     ).replace(
       /\$\.factoryInfo\.data\.result\.UserName/g,
       '$.factoryInfo.data.result.userName'
+    ).replace(
+      /P04z54XCjVWnYaS5m9cZ2esjHVDlwcfuXNvEN4/g,
+      'P04z54XCjVWnYaS5khRQiW7'
     ).replace('$.index = i + 1;', 'UserName = $.UserName;\n$&');
     eval($.body);
   }

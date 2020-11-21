@@ -19,6 +19,10 @@ async function main() {
   await updateShareCodes();
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
+    $.body = $.body.replace(
+      /P04z54XCjVXmIaW5m9cZ2esjHVDlzxvdLVQQM0/g,
+      'P04z54XCjVXmIaW5khRQiW7'
+    );
     eval($.body);
   }
 }
