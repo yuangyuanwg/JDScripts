@@ -1,23 +1,49 @@
 /*
-东东小窝
-更新时间：2020-11-20 13:55
-脚本说明：
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-// quantumultx
+ * @Author: lxk0301 https://github.com/lxk0301 
+ * @Date: 2020-11-12 11:42:12 
+ * @Last Modified by:   lxk0301 
+ * @Last Modified time: 2020-11-22 15:42:12
+ */
+/*
+东东小窝 https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js
+现有功能：
+做日常任务任务，每日抽奖（有机会活动京豆，使用的是免费机会，不消耗WO币）
+助力好友：一个账号一天只能助力一次(即：每个人助力机会只有一次)
+后期有空优化相互助力功能
+TODO；装扮领京豆（使用WO币购买装饰品可以获得京豆，分别可获得5,20，50,100,200,400,700，1200京豆）
+
+注：目前使用此脚本会给脚本内置的两个码进行助力，请知晓
+
+APP活动入口：
+京东APP首页 ->搜索 玩一玩 -> DIY理想家
+或 京东APP -> 我的-> 游戏与更多 - > 东东小窝
+微信小程序入口：
+来客有礼 - > 首页 -> 东东小窝
+网页入口（注：进入后不能再此刷新，否则会有问题，需重新输入此链接进入）
+https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html
+
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
+===============Quantumultx===============
 [task_local]
 #东东小窝
-11 0 * * * https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_woHome.js, tag=东东小窝, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/woHome.png, enabled=true
-// Loon
+16 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js, tag=东东小窝, enabled=true
+
+================Loon==============
 [Script]
-cron "11 0 * * *" script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_woHome.js,tag=东东小窝
-// Surge
-东东小窝 = type=cron,cronexp=11 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_woHome.js
+cron "16 0 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js, tag=东东小窝
+
+===============Surge=================
+东东小窝 = type=cron,cronexp="16 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js
+
+============小火箭=========
+东东小窝 = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js, cronexpr="16 0 * * *", timeout=200, enable=true
  */
 const $ = new Env('东东小窝');
 const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/yangtingxiao/QuantumultX@master/scripts/jd/jd_woHome.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_small_home.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -25,10 +51,14 @@ async function main() {
   await updateShareCodes();
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
+    $.body = $.body.replace(
+      /(const inviteCodes = \[)[^\]]+/,
+      "$1'1330444295062388738'"
+    );
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_woHome.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -45,7 +75,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/yangtingxiao/
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/yangtingxiao/QuantumultX@master/scripts/jd/jd_woHome.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_small_home.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
