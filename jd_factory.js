@@ -34,6 +34,9 @@ async function main() {
       }
       $&`
     ).replace(
+      /'  需要电量⚡ :' \+ \$\.factoryInfo\.data\.result\.factoryInfo\.totalScore/g,
+      `($.factoryInfo.data.result.factoryInfo ? $& : ' ，请重新选择产品！！')`
+    ).replace(
       /\$\.factoryInfo\.data\.result\.UserName/g,
       '$.factoryInfo.data.result.userName'
     ).replace(
@@ -56,6 +59,15 @@ async function main() {
       }
 
       async function __share() {`
+    ).replace(
+      '!$.factoryInfo.data.result.factoryInfo.totalScore) {',
+      '!$.factoryInfo.data.result.factoryInfo || $&'
+    ).replace(
+      'await notify.sendNotify(',
+      `if(((new Date().getTimezoneOffset() / 60 + 8) + new Date().getHours()) % 6 === 0) $&\`\${$.name} - 账号\${$.index} - \${UserName} \`, \`当前电量⚡ :\${$.homeData.data.result.userScore}\\n\` + `
+    ).replace(
+      /await jdFactory\(\);(\s+)await jdfactory_getTaskDetail\(\);/,
+      'await jdfactory_getTaskDetail();$1await jdFactory();'
     );
     eval($.body);
   }
