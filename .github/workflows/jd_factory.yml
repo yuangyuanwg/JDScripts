@@ -37,7 +37,7 @@ jobs:
           npm install
       - name: '运行 【东东工厂脚本】'
         run: |
-          node jd_factory.js
+          node jd_jdfactory.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
