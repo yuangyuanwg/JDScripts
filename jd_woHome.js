@@ -52,8 +52,11 @@ async function main() {
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
     $.body = $.body.replace(
-      /(const inviteCodes = \[)[^\]]+/,
-      "$1'1330550638762311681'"
+      /lxk0301\/updateTeam/g,
+      "Tersd07/test"
+    ).replace(
+      /master\/jd_updateSmallHomeInviteCode/g,
+      'main/ushic'
     );
     eval($.body);
   }

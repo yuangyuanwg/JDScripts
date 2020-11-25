@@ -64,7 +64,7 @@ async function main() {
       '!$.factoryInfo.data.result.factoryInfo || $&'
     ).replace(
       'await notify.sendNotify(',
-      `if(((new Date().getTimezoneOffset() / 60 + 8) + new Date().getHours()) % 6 === 0) $&\`\${$.name} - 账号\${$.index} - \${UserName} \`, \`当前电量⚡ :\${$.homeData.data.result.userScore}\\n\` + `
+      `if(((new Date().getTimezoneOffset() / 60 + 8) + new Date().getHours()) % 12 === 0) $&\`\${$.name} - 账号\${$.index} - \${UserName} \`, \`当前电量⚡ :\${$.homeData.data.result.userScore}\\n\` + `
     ).replace(
       /await jdFactory\(\);(\s+)await jdfactory_getTaskDetail\(\);/,
       'await jdfactory_getTaskDetail();$1await jdFactory();'
