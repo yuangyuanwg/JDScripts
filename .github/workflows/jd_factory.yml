@@ -51,3 +51,4 @@ jobs:
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
           FACTORY_SHARECODES: ${{ secrets.FACTORY_SHARECODES }}
+          DDFACTORY_SHARECODES: ${{ secrets.DDFACTORY_SHARECODES }}

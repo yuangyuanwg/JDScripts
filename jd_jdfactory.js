@@ -28,9 +28,6 @@ async function main() {
     $.body = $.body.replace(
       /(const inviteCodes = \[)[^\]]+/,
       "$1'P04z54XCjVWnYaS5khRQiW7'"
-    ).replace(
-      'if ($.newUser === 1 || ($.newUser !==1 && $.haveProduct === 2)) return',
-      'if ($.newUser === 1) return',
     );
     eval($.body);
   }
