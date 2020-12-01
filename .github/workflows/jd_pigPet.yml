@@ -7,8 +7,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '12 21 * * *' #北京时间0点运行，action会有延迟
-  watch:
-    types: started
   repository_dispatch:
     types: pig_pet
 jobs:

@@ -7,8 +7,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '16 5,12,22 * * *'
-  watch:
-    types: started
   repository_dispatch:
     types: smallHome
 jobs:
