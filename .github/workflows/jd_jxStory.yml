@@ -6,7 +6,7 @@ name: jd_jxStory
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 * * * *'
+    - cron: '30 */4 * * *'
   repository_dispatch:
     types: jxStory
 jobs:
