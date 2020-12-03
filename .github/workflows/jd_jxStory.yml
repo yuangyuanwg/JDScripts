@@ -33,8 +33,9 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【京喜金牌厂长脚本】'
+      - name: '运行 【京喜故事脚本】'
         run: |
           node jx_story.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
+          JXSTORY_SHARECODES: ${{ secrets.JXSTORY_SHARECODES }}

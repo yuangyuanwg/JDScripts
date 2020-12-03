@@ -28,6 +28,12 @@ async function main() {
     $.body = $.body.replace(
       /(const inviteCodes = \[)[^\]]+/,
       "$1'P04z54XCjVWnYaS5khRQiW7'"
+    ).replace(
+      /if \((new Date\(\)\.getHours\(\) === 23)\) \{[\n\r\s]+\$\.msg\(\$\.name/,
+      `if ($.isNode() && new Date().getTimezoneOffset() / 60 + 8 + $1){
+        notify.sendNotify(\`\${$.name} - 账号\$\{\$.index} - \${\$.nickName}\`, message);
+      }
+      $&`
     );
     eval($.body);
   }
