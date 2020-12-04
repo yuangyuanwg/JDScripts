@@ -6,7 +6,7 @@ name: jd_paopao
 on:
   workflow_dispatch:
   schedule:
-    - cron: '24 * * * *'
+    - cron: '24 */12 * * *'
   repository_dispatch:
     types: paopao
 jobs:
