@@ -51,3 +51,5 @@ jobs:
           FACTORY_SHARECODES: ${{ secrets.FACTORY_SHARECODES }}
           DDFACTORY_SHARECODES: ${{ secrets.DDFACTORY_SHARECODES }}
           FACTORAY_WANTPRODUCT_NAME: ${{ secrets.FACTORAY_WANTPRODUCT_NAME }}
+          # 未选择心仪商品时，如果满足兑换电量条件，将忽略包含这些关键字的商品通知。多个关键字使用 @ 分隔。
+          DDFACTORY_NOTIFY_IGNORE_PRODUCTS: ${{ secrets.DDFACTORY_NOTIFY_IGNORE_PRODUCTS }}

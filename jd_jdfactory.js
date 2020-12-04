@@ -34,6 +34,14 @@ async function main() {
         notify.sendNotify(\`\${$.name} - 账号\$\{\$.index} - \${\$.nickName}\`, message);
       }
       $&`
+    ).replace(
+      // DDFACTORY_NOTIFY_IGNORE_PRODUCTS 变量。未选择心仪商品时，
+      // 如果满足兑换电量条件，将忽略包含这些关键字的商品通知。多个关键字使用 @ 分隔。
+      /await notify.sendNotify.+?【满足】兑换\$\{\$\.canMakeList\[0\].name\}所需总电量/,
+      `const __ignore = process.env.DDFACTORY_NOTIFY_IGNORE_PRODUCTS;
+      const __canMakeName = $.canMakeList && $.canMakeList[0] && $.canMakeList[0].name;
+      if(!__ignore || !__canMakeName || __ignore && __canMakeName && !__ignore.split('@').filter(Boolean).some(str => __canMakeName.includes(str)))
+        $&`
     );
     eval($.body);
   }
