@@ -31,7 +31,7 @@ async function main() {
     ).replace(
       /if \((new Date\(\)\.getHours\(\) === 23)\) \{[\n\r\s]+\$\.msg\(\$\.name/,
       `if ($.isNode() && new Date().getTimezoneOffset() / 60 + 8 + $1){
-        notify.sendNotify(\`\${$.name} - 账号\$\{\$.index} - \${\$.nickName}\`, message);
+        notify.sendNotify(\`\${\$.name} - 账号\$\{\$.index} - \${\$.nickName}\`, message);
       }
       $&`
     ).replace(
@@ -42,6 +42,15 @@ async function main() {
       const __canMakeName = $.canMakeList && $.canMakeList[0] && $.canMakeList[0].name;
       if(!__ignore || !__canMakeName || __ignore && __canMakeName && !__ignore.split('@').filter(Boolean).some(str => __canMakeName.includes(str)))
         $&`
+    ).replace(
+      'console.log(`商品名称       可选状态    剩余量`)',
+      `const __l = \$.canMakeList.map(n => Array.from(n.name).reduce((p1, n1) => p1 + (/[^\\x00-\\xff]/.test(n1) ? 2 : 1), 0));
+      const __m = __l.reduce((p, n) => p > n ? p : n);
+      let __index = 0;
+      console.log(\`商品名称\${' '.repeat(__m - 8)}\\t可选状态\\t剩余量\\t所需电量\`)`
+    ).replace(
+      "`${item.name.slice(-4)}         ${item.sellOut === 1 ? '已抢光':'可 选'}      ${item.couponCount}`);",
+      "`${item.name + ' '.repeat(__m - __l[__index++])}\t${item.sellOut === 1 ? '已抢光':'可 选'}\t${item.couponCount}\t${item.fullScore}`);",
     );
     eval($.body);
   }
