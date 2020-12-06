@@ -45,7 +45,7 @@ async function main() {
     ).replace(
       'console.log(`商品名称       可选状态    剩余量`)',
       `const __l = \$.canMakeList.map(n => Array.from(n.name).reduce((p1, n1) => p1 + (/[^\\x00-\\xff]/.test(n1) ? 2 : 1), 0));
-      const __m = __l.reduce((p, n) => p > n ? p : n);
+      const __m = Math.max(...__l);
       let __index = 0;
       console.log(\`商品名称\${' '.repeat(__m - 8)}\\t可选状态\\t剩余量\\t所需电量\`)`
     ).replace(
