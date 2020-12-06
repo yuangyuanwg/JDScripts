@@ -1,33 +1,25 @@
 /*
  * @Author: whyour
  * @Github: https://github.com/whyour
- * @Date: 2020-11-29 13:14:19
+ * @Date: 2020-12-06 11:11:11
  * @LastEditors: whyour
- * @LastEditTime: 2020-11-30 23:17:48
- * 多谢： https://github.com/MoPoQAQ, https://github.com/lxk0301
- * 添加随机助力
- * 自动开团助力
- * box设置不自动充能
- * 可设置每天通知时间
+ * @LastEditTime: 2020-12-06 23:16:27
   quanx:
   [task_local]
-  10 * * * * https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js, tag=京喜工厂, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdgc.png, enabled=true
-
+  10 9,18 * * * https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js, enabled=true
   Loon:
   [Script]
-  cron "10 * * * *" script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js,tag=京喜工厂
-
+  cron "10 9,18 * * *" script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js,tag=京喜农场
   Surge:
-  京喜工厂 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js
+  京喜农场 = type=cron,cronexp="10 9,18 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js
 *
 **/
 
-
-const $ = new Env('京喜工厂参团');
+const $ = new Env('京喜农场');
 const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/whyour/hundun@master/quanx/jx_factory.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/whyour/hundun@master/quanx/jx_nc.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -36,16 +28,13 @@ async function main() {
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
     $.body = $.body.replace(
-      /await getCommodityDetail[\s\S]+(?=await getTuanId)|await showMsg\(\);/gi,
-      ''
-    ).replace(
       'await submitInviteId(userName);',
       "await submitInviteId('jd_' + Buffer.from(userName.repeat(3)).toString('hex').slice(0, 13).toLowerCase());"
     );
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -62,7 +51,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/whyour/hundun
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/whyour/hundun@master/quanx/jx_factory.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/whyour/hundun@master/quanx/jx_nc.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
