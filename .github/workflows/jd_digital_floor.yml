@@ -1,14 +1,14 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_ms_redrain
+name: jd_digital_floor
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '10 16 * * *'
+    - cron: '1 16 * * *'
   repository_dispatch:
-    types: ms_redrain
+    types: digital_floor
 jobs:
   build:
 
@@ -18,8 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: lxk0301/jd_scripts
-          ref: master
+          repository: Tersd07/JDScripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -34,9 +33,9 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【秒杀红包雨脚本】'
+      - name: '运行 【数码加购京豆脚本】'
         run: |
-          node jd_ms_redrain.js
+          node jd_digital_floor.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
