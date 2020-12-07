@@ -1,14 +1,14 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_blueCoin
+name: jd_car
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2,9,16 * * *'
+    - cron: '10 21 * * *'
   repository_dispatch:
-    types: blueCoin
+    types: car
 jobs:
   build:
 
@@ -34,15 +34,13 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【京东超市兑换奖品脚本】'
+      - name: '运行 【京东汽车脚本】'
         run: |
-          node jd_blueCoin.js
+          node jd_car.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
-          MARKET_COIN_TO_BEANS: ${{ secrets.MARKET_COIN_TO_BEANS }}
-          MARKET_REWARD_NOTIFY: ${{ secrets.MARKET_REWARD_NOTIFY }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
