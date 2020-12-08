@@ -37,7 +37,7 @@ async function main() {
     ).replace(
       // DDFACTORY_NOTIFY_IGNORE_PRODUCTS 变量。未选择心仪商品时，
       // 如果满足兑换电量条件，将忽略包含这些关键字的商品通知。多个关键字使用 @ 分隔。
-      /await notify.sendNotify.+?【满足】兑换\$\{\$\.canMakeList\[0\].name\}所需总电量/,
+      /if \(\$\.isNode\(\)\) await notify.sendNotify.+?【满足】兑换\$\{\$\.canMakeList\[0\].name\}所需总电量/,
       `const __ignore = process.env.DDFACTORY_NOTIFY_IGNORE_PRODUCTS;
       const __canMakeName = $.canMakeList && $.canMakeList[0] && $.canMakeList[0].name;
       if(!__ignore || !__canMakeName || __ignore && __canMakeName && !__ignore.split('@').filter(Boolean).some(str => __canMakeName.includes(str)))
@@ -45,7 +45,7 @@ async function main() {
     ).replace(
       'console.log(`商品名称       可选状态    剩余量`)',
       `const __l = \$.canMakeList.map(n => Array.from(n.name).reduce((p1, n1) => p1 + (/[^\\x00-\\xff]/.test(n1) ? 2 : 1), 0));
-      const __m = Math.max(...__l);
+      const __m = Math.max(...__l) + 1;
       let __index = 0;
       console.log(\`商品名称\${' '.repeat(__m - 8)}\\t可选状态\\t剩余量\\t所需电量\`)`
     ).replace(

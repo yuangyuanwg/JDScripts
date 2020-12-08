@@ -6,7 +6,7 @@ name: jd_live_redrain
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1,3,5,7,9,11,12,13,15,16 * * *'
+    - cron: '59 0,2,4,6,8,10,11,12,14,15 * * *'
   repository_dispatch:
     types: live_redrain
 jobs:
@@ -36,6 +36,7 @@ jobs:
           npm install
       - name: '运行 【直播红包雨脚本】'
         run: |
+          sed -i "s/ + new Date().getTimezoneOffset() \* 60 \* 1000 + 8 \* 60 \* 60 \* 1000//g" jd_live_redrain.js
           node jd_live_redrain.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
