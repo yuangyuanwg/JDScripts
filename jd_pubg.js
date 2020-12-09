@@ -1,27 +1,25 @@
 /*
-数码加购京豆
-共计25京豆，一天运行一次即可
-活动时间：2020-12-4 到 2020-12-11
-活动入口：https://prodev.m.jd.com/mall/active/nKxVyPnuLwAsQSTfidZ9z4RKVZy/index.html#/
-更新地址：https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_digital_floor.js
-已支持IOS双京东账号, Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
+PUBG
+活动于2020-12-13日结束
+活动地址：https://starsingle.m.jd.com/static/index.html#/?fromChangeSkinNum=PUBG
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
-#数码加购京豆
-10 7 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_digital_floor.js, tag=数码加购京豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_redPacket.png, enabled=true
+#PUBG
+10 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pubg.js, tag=PUBG, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 7 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_digital_floor.js, tag=数码加购京豆
+cron "10 0 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pubg.js,tag=PUBG
 
 ===============Surge=================
-数码加购京豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_digital_floor.js
+PUBG = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pubg.js
 
 ============小火箭=========
-数码加购京豆 = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_digital_floor.js, cronexpr="10 7 * * *", timeout=200, enable=true
+PUBG = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pubg.js, cronexpr="10 0 * * *", timeout=200, enable=true
  */
-const $ = new Env('数码加购京豆');
+const $ = new Env('PUBG 京豆');
 main();
 async function main() {
   $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_digital_floor.js`}).then((resp) => {
