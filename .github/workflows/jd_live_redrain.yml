@@ -36,7 +36,10 @@ jobs:
           npm install
       - name: '运行 【直播红包雨脚本】'
         run: |
+          # 修正脚本中错误，时间戳比较不用算时区，删除脚本中时区偏移值运算。
           sed -i "s/ + new Date().getTimezoneOffset() \* 60 \* 1000 + 8 \* 60 \* 60 \* 1000//g" jd_live_redrain.js
+          # 如果是在 59分 运行。则在下一分钟的 20秒 后运行。
+          if [ $((10#$(date -u +%M))) -eq 59 ]; then sleep `expr 80 - $((10#$(date +%S)))`; fi 
           node jd_live_redrain.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
