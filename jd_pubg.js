@@ -22,7 +22,7 @@ PUBG = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_script
 const $ = new Env('PUBG 京豆');
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_digital_floor.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_pubg.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -37,7 +37,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_digital_floor.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pubg.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -54,7 +54,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_sc
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_digital_floor.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_pubg.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
