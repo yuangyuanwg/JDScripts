@@ -36,7 +36,7 @@ jobs:
           npm install
       - name: '运行 【领京豆5个任务额外奖励脚本】'
         run: |
-          sed -ri "s/\/[^\/]+\/updateTeam@(main|master)\/jd_bean_home/\/Tersd07\/test@main\/jbh/g" jd_bean_home.js
+          sed -ri "s/\/\/.+?\/[^\/]+\/updateTeam(@|\/raw\/)(main|master)\/jd_bean_home/\/\/cdn.jsdelivr.net\/gh\/Tersd07\/test@main\/jbh/g" jd_bean_home.js
           node jd_bean_home.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}

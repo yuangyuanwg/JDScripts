@@ -44,7 +44,7 @@ async function main() {
       ''
     ).replace(
       // 替换今天的活动 body
-      /(?<=body: ')area=12_904_908_57903&body=%7B%22liveId%22%3A%222997252[^']+(?=')/,
+      /(?<=body: ')area=12_904_908_57903&body=%7B%22liveId%22%3A%[^']+(?=')/,
       'adid=D859DCC0-BC84-43ED-BD00-8062B9EE7EA6&area=12_988_3444_48014&body=%7B%22liveId%22%3A%222872849%22%7D&build=167454&client=apple&clientVersion=9.3.0&d_brand=apple&d_model=iPhone13%2C3&eid=eidIfb84812232schIl2wdu7RM%2BVUm3M/jNje4SJeDgOWmXVtdOoguyIMsukDbZyB2WOBEFLLB3oXBwhuUmAAMq/JMdAA/V6yp%2BZbsw1DYJDCiKDvw9M&isBackground=N&joycious=413&lang=zh_CN&networkType=4g&networklibtype=JDNetworkBaseAF&openudid=5675c7df49de13aeca1e98def1d789a3cf4c84a6&osVersion=14.2.1&partner=apple&rfs=0000&scope=11&screen=1125%2A2436&sign=4a8a53b21ce3ece9254d4e89019c3dce&st=1607565455011&sv=111&uts=0f31TVRjBSvPgpB1zmogMQgKU6wbESPRsZdtyBE9/MXWdFt7R3G3WpIW4oozqFlo/mcZvz8%2B9EFkFBNKJhNPMv9PabOJuRnCcA5Ih3q3LkmmavL9MC9YsS4tC1wfQNQXXUfukrFfldUIDZ4NvltjsTFg4QaCars0AYdVGmL70q0HB9DTSQV0oeTFtLOj6w6WrGL1y4iDVbATf2FgyqwiyQ%3D%3D&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D&wifiBssid=unknown'
     );
     eval($.body);
