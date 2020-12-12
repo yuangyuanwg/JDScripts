@@ -36,6 +36,8 @@ jobs:
           npm install
       - name: '运行 【点点券脚本】'
         run: |
+          # 仅在零时通知
+          sed -ri "s/\\$\.isNode\(\) && \\$\.totalScore >= 10000/& \&\& (new Date().getTimezoneOffset() \/ 60 + 8 + new Date().getHours()) % 24 === 0/" jd_necklace.js
           node jd_necklace.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
