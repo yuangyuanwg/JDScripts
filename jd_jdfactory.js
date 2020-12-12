@@ -51,6 +51,9 @@ async function main() {
     ).replace(
       "`${item.name.slice(-4)}         ${item.sellOut === 1 ? '已抢光':'可 选'}      ${item.couponCount}`);",
       "`${item.name + ' '.repeat(__m - __l[__index++])}\t${item.sellOut === 1 ? '已抢光':'可 选'}\t${item.couponCount}\t${item.fullScore}`);",
+    ).replace(
+      /\(totalScore \* 1\)\)\.toFixed\(2\) \* 100/g,
+      '(totalScore * 1) * 100).toFixed(2)'
     );
     eval($.body);
   }
