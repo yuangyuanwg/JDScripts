@@ -42,6 +42,9 @@ async function main() {
       // 修正脚本中错误，时间戳比较不用算时区，删除脚本中时区偏移值运算。
       / \+ new Date\(\)\.getTimezoneOffset\(\) \* 60 \* 1000 \+ 8 \* 60 \* 60 \* 1000/g,
       ''
+    ).replace(
+      /require\('\.\.\//g,
+      "require\('./"
     );
     eval($.body);
   }
