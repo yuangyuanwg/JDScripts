@@ -30,7 +30,7 @@ async function main() {
     console.log(`时间未到，等待 ${s} 秒后继续执行。`);
     await $.wait(s * 1000);
   }
-  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_live_redrain.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/activity/jd_live_redrain.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -46,7 +46,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/activity/jd_live_redrain.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -63,7 +63,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_sc
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_live_redrain.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/activity/jd_live_redrain.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
