@@ -47,10 +47,10 @@ async function main() {
       `const __l = \$.canMakeList.map(n => Array.from(n.name).reduce((p1, n1) => p1 + (/[^\\x00-\\xff]/.test(n1) ? 2 : 1), 0));
       const __m = Math.max(...__l) + 1;
       let __index = 0;
-      console.log(\`商品名称\${' '.repeat(__m - 8)}\\t可选状态\\t剩余量\\t所需电量\`)`
+      console.log(\`商品名称\${' '.repeat(__m - 8)}\\t剩余量\\t所需电量\`)`
     ).replace(
       "`${item.name.slice(-4)}         ${item.sellOut === 1 ? '已抢光':'可 选'}      ${item.couponCount}`);",
-      "`${item.name + ' '.repeat(__m - __l[__index++])}\t${item.sellOut === 1 ? '已抢光':'可 选'}\t${item.couponCount}\t${item.fullScore}`);",
+      "`${item.name + ' '.repeat(__m - __l[__index++])}\t${item.couponCount}\t${item.fullScore}`);",
     ).replace(
       /\(totalScore \* 1\)\)\.toFixed\(2\) \* 100/g,
       '(totalScore * 1) * 100).toFixed(2)'
