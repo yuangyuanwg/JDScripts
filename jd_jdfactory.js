@@ -54,6 +54,13 @@ async function main() {
     ).replace(
       /\(totalScore \* 1\)\)\.toFixed\(2\) \* 100/g,
       '(totalScore * 1) * 100).toFixed(2)'
+    ).replace(
+      /message \+= `当前剩余最多商品.+/,
+      `$&;let __p = $.canMakeList.filter(p => p.sellOut !== 1 && p.fullScore * 1 <= $.batteryValue * 1);
+      __p = __p.length > 0 && __p.reduce((p, n) => p.fullScore * 1 > n.fullScore * 1 ? p : n);
+      if(__p && $.canMakeList[0] !== __p){
+        message += \`您当前能换到最贵的商品：\${__p.name}\\n\`;
+      }`
     );
     eval($.body);
   }
