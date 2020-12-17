@@ -6,7 +6,7 @@ name: jd_watch
 on:
   workflow_dispatch:
   schedule:
-    - cron: '40 1 * * *'
+    - cron: '3,30,50 0 * * *'
   repository_dispatch:
     types: jd_watch
 jobs:
@@ -49,4 +49,5 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-          JD_818_SHAREID_NOTIFY: ${{ secrets.JD_818_SHAREID_NOTIFY }}
+          WATCH_ACCEPTBODY: ${{ secrets.WATCH_ACCEPTBODY }}
+          WATCH_DOBODY: ${{ secrets.WATCH_DOBODY }}
