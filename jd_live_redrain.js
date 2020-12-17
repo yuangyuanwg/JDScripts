@@ -25,12 +25,17 @@ main();
 async function main() {
   while(true) {
     const t = 15 * 1000;
-    const d = new Date();
-    const cM = d.getMinutes();
-    if(cM < 55) break;
+    const d = new Date(Date.now() + (new Date().getTimezoneOffset() + 8 * 60) * 60 * 1000);
+    let cM = d.getMinutes();
+    if(cM === 0) cM = 60;
     // 如果是在 55分 后运行。则在下一个零时的 10秒 后运行。
-    let s = (((60 - cM) * 60) - d.getSeconds() + 10) * 1000 - d.getMilliseconds();
-    console.log(`${$.name}时间未到，还需等待 ${(s / 1000).toFixed(0)} 秒后才能继续执行。`);
+    const s = (((60 - cM) * 60) - d.getSeconds() + 10) * 1000 - d.getMilliseconds();
+    if(s < 0 || cM < 55) break;
+    console.log(`当前 ${
+      d.toTimeString().replace(/\s.+/, '')
+    }，${$.name}时间未到，还需等待 ${
+      (s / 1000).toFixed(0)
+    } 秒后才能继续执行。`);
     if(s - t < 0){
       await $.wait(s);
       break;

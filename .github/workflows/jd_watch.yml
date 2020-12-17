@@ -6,7 +6,7 @@ name: jd_watch
 on:
   workflow_dispatch:
   schedule:
-    - cron: '3,30,50 0 * * *'
+    - cron: '43 0,1,2 * * *'
   repository_dispatch:
     types: jd_watch
 jobs:
