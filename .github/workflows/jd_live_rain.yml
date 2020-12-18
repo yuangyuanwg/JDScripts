@@ -6,7 +6,7 @@ name: jd_live_rain
 on:
   workflow_dispatch:
   schedule:
-    - cron: '56 0,2,4,6,8,10,11,12,14,15 * * *'
+    - cron: '55 0,2,4,6,8,10,11,12,14,15 * * *'
   repository_dispatch:
     types: live_rain
 jobs:
