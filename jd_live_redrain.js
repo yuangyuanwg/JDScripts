@@ -51,6 +51,7 @@ async function main() {
   await updateShareCodes();
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
+
     $.body = $.body.replace(
       // 修正脚本中错误，时间戳比较不用算时区，删除脚本中时区偏移值运算。
       / \+ new Date\(\)\.getTimezoneOffset\(\) \* 60 \* 1000 \+ 8 \* 60 \* 60 \* 1000/g,
@@ -59,6 +60,32 @@ async function main() {
       /require\('\.\.\//g,
       "require\('./"
     );
+    const m = $.body.match(/(function getRedRain)(\(\)[\s\S]+?)(?=\nfunction)/);
+    if(m){
+      $.body = $.body.replace(
+        m[0],
+        `${
+          m[0].replace(
+            '}, (err, resp, data) => {',
+            '}, async (err, resp, data) => {'
+          ).replace(
+            /console\.log\(`下一场红包雨结束时间.+/,
+            `$&
+            if(Date.now() - $.ed > 59 * 60 * 1000){
+              //结束时间大于59分钟
+              console.log('\\n当前 jd_live_redRain.json 的活动 id 结束时间大于一个小时，\\n将使用 jd_live_redRain3.json 的活动 id。\\n');
+              await getRedRain_1();
+              return resolve();
+            }`
+          )
+        }\n${m[1]}_1${
+          m[2].replace(
+            'jd_live_redRain.json',
+            'jd_live_redRain3.json'
+          )
+        }`
+      )
+    }
     eval($.body);
   }
 }
