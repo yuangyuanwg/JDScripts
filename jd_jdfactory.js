@@ -59,8 +59,12 @@ async function main() {
       `$&;let __p = $.canMakeList.filter(p => p.sellOut !== 1 && p.fullScore * 1 <= $.batteryValue * 1);
       __p = __p.length > 0 && __p.reduce((p, n) => p.fullScore * 1 > n.fullScore * 1 ? p : n);
       if(__p && $.canMakeList[0] !== __p){
-        message += \`您当前能换到最贵的商品：\${__p.name}\\n\`;
+        message += \`当前可换最贵商品：\${__p.name}\\n\`;
       }`
+    ).replace(
+      "$.log(`京东账号",
+      `if(new Date(Date.now() + (new Date().getTimezoneOffset() + 8 * 60) * 60 * 1000).getHours() !== 12)
+        $.msg($.name, '', \`京东账号`
     );
     eval($.body);
   }
