@@ -51,7 +51,6 @@ async function main() {
   await updateShareCodes();
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
-
     $.body = $.body.replace(
       // 修正脚本中错误，时间戳比较不用算时区，删除脚本中时区偏移值运算。
       / \+ new Date\(\)\.getTimezoneOffset\(\) \* 60 \* 1000 \+ 8 \* 60 \* 60 \* 1000/g,
@@ -73,7 +72,7 @@ async function main() {
             `$&
             if(Date.now() - $.ed > 59 * 60 * 1000){
               //结束时间大于59分钟
-              console.log('\\n当前 jd_live_redRain.json 的活动 id 结束时间大于一个小时，\\n将使用 jd_live_redRain3.json 的活动 id。\\n');
+              console.log('\\n当前 jd_live_redRain.json 的活动 id 已过期，\\n将尝试使用 jd_live_redRain3.json 的活动 id。\\n');
               await getRedRain_1();
               return resolve();
             }`
