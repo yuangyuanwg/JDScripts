@@ -6,7 +6,7 @@ name: jd_jdzz
 on:
   workflow_dispatch:
   schedule:
-    - cron: '55 16 * * *'
+    - cron: '12 3 * * *'
   repository_dispatch:
     types: jdzz
 jobs:
