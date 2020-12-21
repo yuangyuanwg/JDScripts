@@ -71,14 +71,22 @@ async function main() {
       ).replace(
         m1[0], ''
       ).replace(
+        'message = `【${new Date($.st).getHours()}点${$.name}】`',
+        ''
+      ).replace(
+        "let cookiesArr = [], cookie = '', message;",
+        "let cookiesArr = [], cookie = '', message = '', _beansCount = 0;"
+      ).replace(
         'await receiveRedRain();',
         `
         console.log('正在进行 jd_live_redRain.json 的活动 id。\\n');
         ${m1[0].replace(
           /return/g, 'void(0);'
         )}else{
-          if($.activityId)
+          if($.activityId){
+            if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
             $&
+          }
         }
         console.log('\\n\\n正在进行 jd_live_redRain3.json 的活动 id。\\n');
         ${m1[1]}_1${m1[2].replace(
@@ -86,9 +94,21 @@ async function main() {
         ).replace(
           'let nowTs', 'nowTs'
         )}else{
-          if($.activityId)
+          if($.activityId){
+            if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
             $&
+          }
         }`
+      ).replace(
+        'message += `领取成功，获得 ${(data.lotteryResult.jPeasList[0].quantity)} 京豆\\n`',
+        `$&;\n_beansCount += (data.lotteryResult.jPeasList[0].quantity * 1);`
+      ).replace(
+        'async function showMsg() {',
+        `$&\nif(!message) {
+          return
+        }else if(_beansCount){
+          message += \`\\n共获得 \${_beansCount} 京豆。\`;
+        };`
       );
     }
     eval($.body);
