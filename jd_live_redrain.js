@@ -28,9 +28,9 @@ async function main() {
     const d = new Date(Date.now() + (new Date().getTimezoneOffset() + 8 * 60) * 60 * 1000);
     let cM = d.getMinutes();
     if(cM === 0) cM = 60;
-    // 如果是在 55分 后运行。则在下一个零时的 10秒 后运行。
+    // 如果是在 50分 后运行。则在下一个零时的 10秒 后运行。
     const s = (((60 - cM) * 60) - d.getSeconds() + 10) * 1000 - d.getMilliseconds();
-    if(s < 0 || cM < 55) break;
+    if(s < 0 || cM < 50) break;
     console.log(`当前 ${
       d.toTimeString().replace(/\s.+/, '')
     }，${$.name}时间未到，还需等待 ${
