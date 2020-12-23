@@ -36,6 +36,7 @@ jobs:
           npm install
       - name: '运行 【种豆得豆】'
         run: |
+          sed -ri "s/newShareCodes = \[\.\.\.new Set\(\[/&'n5n22aiyk4e7rlv4vuziuuljgi',/" jd_plantBean.js
           node jd_plantBean.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}

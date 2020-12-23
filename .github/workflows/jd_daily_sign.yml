@@ -140,3 +140,21 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
+      - name: '运行 【crazy joy 脚本】'
+        run: |
+          sed -ri "s/(const inviteCodes = \[)/\1'egfxMLFSjng='];const _xx=[/; s/(getUserInfo\(code = \")[^\"]+/\1egfxMLFSjng=/" jd_crazy_joy.js
+          node jd_crazy_joy.js
+        env:
+          JD_COOKIE: ${{ secrets.JD_COOKIE }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          QQ_SKEY: ${{ secrets.QQ_SKEY }}
+          QQ_MODE: ${{ secrets.QQ_MODE }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
+          BARK_SOUND: ${{ secrets.BARK_SOUND }}
+          DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
