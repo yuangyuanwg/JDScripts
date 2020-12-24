@@ -6,7 +6,7 @@ name: jd_jkHealth
 on:
   workflow_dispatch:
   schedule:
-    - cron: '8 0 * * *'
+    - cron: '8 22 * * *'
   repository_dispatch:
     types: jkHealth
 jobs:
