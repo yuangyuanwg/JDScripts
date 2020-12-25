@@ -58,7 +58,7 @@ async function main() {
     );
     //同时运行 jd_live_redRain3.json 的活动 id。
     const m = $.body.match(/(function getRedRain)(\(\)[\s\S]+?)(?=\nfunction)/);
-    const m1 = $.body.match(/(await getRedRain)(\(\);[\s\S]+?console\.log\(`不在红包雨时间之内`\);?\s+return;?\s+\})/);
+    const m1 = $.body.match(/(await getRedRain)(\(\);[\s\S]+?\$\.log\(`远程红包雨配置获取成功`\)\s+\})/);
     if(m && m1){
       $.body = $.body.replace(
         m[0],
@@ -83,22 +83,20 @@ async function main() {
         console.log('正在进行 jd_live_redRain.json 的活动 id。\\n');
         ${m1[0].replace(
           /return/g, 'void(0);'
-        )}else{
-          if($.activityId){
-            if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
-            $&
-          }
+        )}
+        if($.activityId){
+          if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
+          $&
         }
         console.log('\\n\\n正在进行 jd_live_redRain3.json 的活动 id。\\n');
         ${m1[1]}_1${m1[2].replace(
           /return/g, 'void(0);'
         ).replace(
           'let nowTs', 'nowTs'
-        )}else{
-          if($.activityId){
-            if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
-            $&
-          }
+        )}
+        if($.activityId){
+          if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
+          $&
         }`
       ).replace(
         'message += `领取成功，获得 ${(data.lotteryResult.jPeasList[0].quantity)} 京豆\\n`',
