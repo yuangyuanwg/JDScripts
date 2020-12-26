@@ -27,8 +27,7 @@ async function main() {
   while(true) {
     const t = 15 * 1000;
     const d = new Date(Date.now() + (new Date().getTimezoneOffset() + 8 * 60) * 60 * 1000);
-    let cM = d.getMinutes();
-    if(cM === 0) cM = 60;
+    const cM = d.getMinutes() % 60;
     // 如果是在非红包雨活动小时的 35分 后运行。则在下一个零时的 10秒 后运行。
     const s = (((60 - cM) * 60) - d.getSeconds() + 10) * 1000 - d.getMilliseconds();
     if(s < 0 || cM < 35 || (cM > 5 && cM < 50 && hours.includes(d.getHours()))) break;
@@ -72,7 +71,7 @@ async function main() {
       ).replace(
         m1[0], ''
       ).replace(
-        'message = `【${new Date($.st).getHours()}点${$.name}】`',
+        'message = `【${new Date().getUTCHours()+8}点${$.name}】`',
         ''
       ).replace(
         "let cookiesArr = [], cookie = '', message;",
@@ -85,7 +84,7 @@ async function main() {
           /return/g, 'void(0);'
         )}
         if($.activityId){
-          if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
+          if(!message) message += \`【\${new Date().getUTCHours()+8}点\${$.name}】\\n\`;
           $&
         }
         console.log('\\n\\n正在进行 jd_live_redRain3.json 的活动 id。\\n');
@@ -95,7 +94,7 @@ async function main() {
           'let nowTs', 'nowTs'
         )}
         if($.activityId){
-          if(!message) message += \`【\${new Date($.st).getHours()}点\${$.name}】\\n\`;
+          if(!message) message += \`【\${new Date().getUTCHours()+8}点\${$.name}】\\n\`;
           $&
         }`
       ).replace(
