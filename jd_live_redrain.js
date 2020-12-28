@@ -88,14 +88,13 @@ async function main() {
           $&
         }
         console.log('\\n\\n正在进行 jd_live_redRain3.json 的活动 id。\\n');
-        ${m1[1]}_1${m1[2].replace(
-          /return/g, 'void(0);'
-        ).replace(
-          'let nowTs', 'nowTs'
-        )}
-        if($.activityId){
+        ${m1[1]}_1();
+        nowTs = new Date().getTime();
+        if ($.st <= nowTs && nowTs < $.ed) {
           if(!message) message += \`【\${new Date().getUTCHours()+8}点\${$.name}】\\n\`;
           $&
+        }else{
+          $.log(\`不在红包雨时间之内\`);
         }`
       ).replace(
         'message += `领取成功，获得 ${(data.lotteryResult.jPeasList[0].quantity)} 京豆\\n`',
