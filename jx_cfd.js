@@ -33,8 +33,12 @@ async function main() {
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
     $.body = $.body.replace(
-      'await submitInviteId(userName);',
+      'await submitInviteId($.userName);',
       "await submitInviteId('jd_' + Buffer.from(userName.repeat(3)).toString('hex').slice(0, 13).toLowerCase());"
+    ).replace(
+      //取消通知
+      'await notify.sendNotify(${$.name}',
+      'if(0) $&'
     );
     eval($.body);
   }
