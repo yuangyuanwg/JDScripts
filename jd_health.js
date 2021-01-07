@@ -31,7 +31,7 @@ async function main() {
   if ($.body) {
     $.body = $.body.replace(
       /(const inviteCodes = \[)[^\]]+/,
-      "$1'P04z54XCjVUnoaW5khRQiW7'"
+      "$1'T007w6Q5BV0CjVUnoaW5kRrbA'"
     );
     eval($.body);
   }
