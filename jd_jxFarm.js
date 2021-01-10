@@ -16,25 +16,31 @@
 **/
 
 const $ = new Env('京喜农场');
-const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/whyour/hundun@master/quanx/jx_nc.js`}).then((resp) => {
-    if (resp.statusCode === 200) {
-      console.log(`${$.name}CDN缓存刷新成功`)
-    }
+  await new Promise(async (resolve) => {
+    $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_jxnc.js`}).then((resp) => {
+      if (resp.statusCode === 200)
+        console.log(`${$.name}CDN缓存刷新成功`)
+      resolve();
+    });
+    await $.wait(10000);
+    resolve();
   });
+  let _smps = await updateShareCodesCDN1();
   await updateShareCodes();
   if (!$.body) await updateShareCodesCDN();
   if ($.body) {
     $.body = $.body.replace(
-      'await submitInviteId(userName);',
-      `await submitInviteId('jd_' + Buffer.from(userName.repeat(3)).toString('hex').slice(0, 13).toLowerCase());\n${_helpUser.toString()};\nawait _helpUser();`
+      /(?<=const shareCode = ')[^']+/i, _smps.join('@')
+    ).replace(
+      'await submitInviteId($.UserName);',
+      `await submitInviteId('jd_' + Buffer.from($.UserName.repeat(3)).toString('hex').slice(0, 13).toLowerCase());\n${_helpUser.toString()};\nawait _helpUser(_smps);`
     );
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_jxnc.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -51,7 +57,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/whyour/hundun
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/whyour/hundun@master/quanx/jx_nc.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_jxnc.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -74,13 +80,13 @@ function updateShareCodesCDN1(cache) {
   const url = `https://${cache ? 'purge': 'cdn'}.jsdelivr.net/gh/Tersd07/test@main/nc.json`;
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
-      let code;
+      let code = [];
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          code = JSON.parse(data);
+          code = JSON.parse(data).inviteCode;
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -92,9 +98,7 @@ function updateShareCodesCDN1(cache) {
 }
 
 async function _helpUser(smps) {
-  await updateShareCodesCDN1(1);
-  const code = await updateShareCodesCDN1();
-  if(!code || !(smps = code.inviteCode) || smps.length === 0) return;
+  if(smps.length === 0) return;
   for(const smp of smps) {
     if($.info && $.info.smp && $.info.smp === smp) continue;
     await new Promise(async (resolve) => {
@@ -104,7 +108,7 @@ async function _helpUser(smps) {
           try {
             const res = data.match(/try\{whyour\(([\s\S]*)\)\;\}catch\(e\)\{\}/)[1];
             const { ret, retmsg = '' } = JSON.parse(res);
-            console.log(`\n助力：${retmsg} \n${$.showLog ? res : ''}`);
+            //console.log(`\n助力：${retmsg} \n${$.showLog ? res : ''}`);
           } catch (e) {
             $.logErr(e, resp);
           } finally {
@@ -112,8 +116,6 @@ async function _helpUser(smps) {
           }
         },
       );
-      $.wait(10000);
-      resolve();
     })
   };
 }
