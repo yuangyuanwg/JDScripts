@@ -36,6 +36,7 @@ jobs:
           npm install
       - name: '运行 【口袋书店脚本】'
         run: |
+          sed -ri "s/28a699ac78d74aa3b31f7103597f8927[^']*/7d978a56a7a144cdb10f92042f87bcd7/g" jd_bookshop.js
           node jd_bookshop.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
