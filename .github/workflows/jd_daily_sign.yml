@@ -103,10 +103,12 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-      - name: '运行 【签到领现金脚本】'
+      - name: '运行 【京喜app签到脚本】'
         run: |
-          sed -ri "s/\/\/.+?\/[^\/]+\/updateTeam(@|\/raw\/)(main|master)\/jd_cash/\/\/cdn.jsdelivr.net\/gh\/Tersd07\/test@main\/cs/g" jd_cash.js
-          node jd_cash.js
+          curl -O https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jingxi.js > /dev/null 2>&1
+          # 16时(第2次运行)不要发送通知
+          if [ $((10#$(date -d +8hour -u +%H))) -eq 16 ]; then sed -ri "s/await notify\.sendNotify\(/console.log(/g" jingxi.js; fi
+          node jingxi.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
@@ -121,12 +123,10 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-      - name: '运行 【京喜app签到脚本】'
+      - name: '运行 【签到领现金脚本】'
         run: |
-          curl -O https://raw.githubusercontent.com/Sunert/Scripts/master/Task/jingxi.js > /dev/null 2>&1
-          # 16时(第2次运行)不要发送通知
-          if [ $((10#$(date -d +8hour -u +%H))) -eq 16 ]; then sed -ri "s/await notify\.sendNotify\(/console.log(/g" jingxi.js; fi
-          node jingxi.js
+          sed -ri "s/\/\/.+?\/[^\/]+\/updateTeam(@|\/raw\/)(main|master)\/jd_cash/\/\/cdn.jsdelivr.net\/gh\/Tersd07\/test@main\/cs/g" jd_cash.js
+          node jd_cash.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
