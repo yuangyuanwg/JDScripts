@@ -6,7 +6,7 @@ name: jd_family
 on:
   workflow_dispatch:
   schedule:
-    - cron: '2 0,4,8,16 * * *'
+    - cron: '2 * * * *'
   repository_dispatch:
     types: family
 jobs:
