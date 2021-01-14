@@ -7,23 +7,23 @@
 ============Quantumultx===============
 [task_local]
 #苹果抽奖机
-10 0 * * * https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_apple_live.js, tag=苹果抽奖机, enabled=true
+10 0 * * * https://raw.githubusercontent.com/Tersd07/st1/master/jd_apple_live.js, tag=苹果抽奖机, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 0 * * *" script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_apple_live.js,tag=苹果抽奖机
+cron "10 0 * * *" script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_apple_live.js,tag=苹果抽奖机
 
 ===============Surge=================
-苹果抽奖机 = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_apple_live.js
+苹果抽奖机 = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_apple_live.js
 
 ============小火箭=========
-苹果抽奖机 = type=cron,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_apple_live.js, cronexpr="10 0 * * *", timeout=200, enable=true
+苹果抽奖机 = type=cron,script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_apple_live.js, cronexpr="10 0 * * *", timeout=200, enable=true
  */
 const $ = new Env('苹果抽奖机');
 
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_apple_live.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/Tersd07/st1@master/jd_apple_live.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -38,7 +38,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_apple_live.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/Tersd07/st1/master/jd_apple_live.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -55,7 +55,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_s
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_apple_live.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/Tersd07/st1@master/jd_apple_live.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

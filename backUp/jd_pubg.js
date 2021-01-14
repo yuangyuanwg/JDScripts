@@ -7,22 +7,22 @@ PUBG
 ============Quantumultx===============
 [task_local]
 #PUBG
-10 0 * * * https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_pubg.js, tag=PUBG, enabled=true
+10 0 * * * https://raw.githubusercontent.com/Tersd07/st1/master/jd_pubg.js, tag=PUBG, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 0 * * *" script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_pubg.js,tag=PUBG
+cron "10 0 * * *" script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_pubg.js,tag=PUBG
 
 ===============Surge=================
-PUBG = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_pubg.js
+PUBG = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_pubg.js
 
 ============小火箭=========
-PUBG = type=cron,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_pubg.js, cronexpr="10 0 * * *", timeout=200, enable=true
+PUBG = type=cron,script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_pubg.js, cronexpr="10 0 * * *", timeout=200, enable=true
  */
 const $ = new Env('PUBG 京豆');
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_pubg.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/Tersd07/st1@master/jd_pubg.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -37,7 +37,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_pubg.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/Tersd07/st1/master/jd_pubg.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -54,7 +54,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_s
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_pubg.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/Tersd07/st1@master/jd_pubg.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

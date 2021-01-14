@@ -9,17 +9,17 @@
 ============Quantumultx===============
 [task_local]
 #京喜故事
-10 7 * * * https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jxstory.js, tag=京喜故事, enabled=true
+10 7 * * * https://raw.githubusercontent.com/Tersd07/st1/master/jd_jxstory.js, tag=京喜故事, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 7 * * *" script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jxstory.js,tag=京喜故事
+cron "10 7 * * *" script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_jxstory.js,tag=京喜故事
 
 ===============Surge=================
-京喜故事 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jxstory.js
+京喜故事 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_jxstory.js
 
 ============小火箭=========
-京喜故事 = type=cron,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jxstory.js, cronexpr="10 * * * *", timeout=200, enable=true
+京喜故事 = type=cron,script-path=https://raw.githubusercontent.com/Tersd07/st1/master/jd_jxstory.js, cronexpr="10 * * * *", timeout=200, enable=true
 
  */
 
@@ -27,7 +27,7 @@ cron "10 7 * * *" script-path=https://raw.githubusercontent.com/shylocks/jd_scri
 const $ = new Env('京喜故事');
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_jxstory.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/Tersd07/st1@master/jd_jxstory.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -42,7 +42,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jxstory.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/Tersd07/st1/master/jd_jxstory.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -59,7 +59,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_s
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_jxstory.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/Tersd07/st1@master/jd_jxstory.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

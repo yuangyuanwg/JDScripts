@@ -19,7 +19,7 @@ const $ = new Env('京喜农场');
 main();
 async function main() {
   await new Promise(async (resolve) => {
-    $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_jxnc.js`}).then((resp) => {
+    $.http.get({url: `https://purge.jsdelivr.net/gh/Tersd07/st1@master/jd_jxnc.js`}).then((resp) => {
       if (resp.statusCode === 200)
         console.log(`${$.name}CDN缓存刷新成功`)
       resolve();
@@ -40,7 +40,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jxnc.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/Tersd07/st1/master/jd_jxnc.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -57,7 +57,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_s
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_jxnc.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/Tersd07/st1@master/jd_jxnc.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

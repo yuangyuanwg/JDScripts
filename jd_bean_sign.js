@@ -10,7 +10,7 @@ detail url: https://github.com/ruicky/jd_sign_bot
 const $ = new Env('京豆签到');
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_bean_sign.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/Tersd07/st1@master/jd_bean_sign.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -27,7 +27,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_bean_sign.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/Tersd07/st1/master/jd_bean_sign.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -44,7 +44,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_s
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_bean_sign.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/Tersd07/st1@master/jd_bean_sign.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
