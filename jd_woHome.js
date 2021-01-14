@@ -5,7 +5,7 @@
  * @Last Modified time: 2020-11-22 15:42:12
  */
 /*
-东东小窝 https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js
+东东小窝 https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_small_home.js
 现有功能：
 做日常任务任务，每日抽奖（有机会活动京豆，使用的是免费机会，不消耗WO币）
 助力好友：一个账号一天只能助力一次(即：每个人助力机会只有一次)
@@ -27,23 +27,23 @@ https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html
 ===============Quantumultx===============
 [task_local]
 #东东小窝
-16 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js, tag=东东小窝, enabled=true
+16 0 * * * https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_small_home.js, tag=东东小窝, enabled=true
 
 ================Loon==============
 [Script]
-cron "16 0 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js, tag=东东小窝
+cron "16 0 * * *" script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_small_home.js, tag=东东小窝
 
 ===============Surge=================
-东东小窝 = type=cron,cronexp="16 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js
+东东小窝 = type=cron,cronexp="16 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_small_home.js
 
 ============小火箭=========
-东东小窝 = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js, cronexpr="16 0 * * *", timeout=200, enable=true
+东东小窝 = type=cron,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_small_home.js, cronexpr="16 0 * * *", timeout=200, enable=true
  */
 const $ = new Env('东东小窝');
 const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_small_home.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_small_home.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -61,7 +61,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_small_home.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_small_home.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -78,7 +78,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_sc
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_small_home.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_small_home.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

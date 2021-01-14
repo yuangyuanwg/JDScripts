@@ -17,7 +17,7 @@ const $ = new Env('东东工厂');
 const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_jdfactory.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_jdfactory.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -69,7 +69,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_jdfactory.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_jdfactory.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -86,7 +86,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_sc
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_jdfactory.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_jdfactory.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

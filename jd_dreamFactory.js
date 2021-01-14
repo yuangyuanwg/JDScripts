@@ -2,7 +2,7 @@
 京东京喜工厂
 活动入口 :京东APP->游戏与互动->查看更多->京喜工厂
 或者: 京东APP首页搜索 "玩一玩" ,造物工厂即可
-cron 15 * * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_dreamFactory.js
+cron 15 * * * * https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_dreamFactory.js
  */
 
 
@@ -10,7 +10,7 @@ const $ = new Env('京喜工厂');
 const notify = $.isNode() ? require('./sendNotify') : '';
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_dreamFactory.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_dreamFactory.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -25,7 +25,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_dreamFactory.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_dreamFactory.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -42,7 +42,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_sc
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_dreamFactory.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_dreamFactory.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

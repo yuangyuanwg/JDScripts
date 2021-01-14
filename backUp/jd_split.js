@@ -7,22 +7,22 @@
 ============Quantumultx===============
 [task_local]
 #金榜年终奖
-10 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_split.js, tag=年终奖, enabled=true
+10 0 * * * https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_split.js, tag=年终奖, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 0 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_split.js,tag=年终奖
+cron "10 0 * * *" script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_split.js,tag=年终奖
 
 ===============Surge=================
-金榜年终奖 = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_split.js
+金榜年终奖 = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_split.js
 
 ============小火箭=========
-金榜年终奖 = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_split.js, cronexpr="10 0 * * *", timeout=200, enable=true
+金榜年终奖 = type=cron,script-path=https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_split.js, cronexpr="10 0 * * *", timeout=200, enable=true
  */
 const $ = new Env('金榜年终奖');
 main();
 async function main() {
-  $.http.get({url: `https://purge.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_split.js`}).then((resp) => {
+  $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_split.js`}).then((resp) => {
     if (resp.statusCode === 200) {
       console.log(`${$.name}CDN缓存刷新成功`)
     }
@@ -37,7 +37,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_split.js') {
+function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/jd_scripts/master/jd_split.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -54,7 +54,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/lxk0301/jd_sc
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/lxk0301/jd_scripts@master/jd_split.js') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/jd_scripts@master/jd_split.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
