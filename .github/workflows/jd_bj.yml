@@ -37,6 +37,7 @@ jobs:
       - name: '运行 【宝洁美发屋脚本】'
         run: |
           curl -O https://raw.githubusercontent.com/shylocks/Loon/main/jd_bj.js > /dev/null 2>&1
+          sed -ri "s/\('(\\\x47\\\x49\\\x54\\\x48\\\x55\\\x42|GI.HUB)'\)/('GxIxTxHxUxB')/g" jd_bj.js
           node jd_bj.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
