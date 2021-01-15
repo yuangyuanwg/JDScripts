@@ -143,9 +143,9 @@ $.info = {};
 
       //出岛寻宝大作战
       await $.wait(500);
-      await submitGroupId();
-      await $.wait(500);
-      await joinGroup();
+      // await submitGroupId();
+      // await $.wait(500);
+      // await joinGroup();
       //提交邀请码
       await $.wait(500);
       await submitInviteId('jd_' + Buffer.from($.userName.repeat(3)).toString('hex').slice(0, 13).toLowerCase());
@@ -715,6 +715,7 @@ function createAssistUser() {
 }
 
 //提交互助码
+let submitGroupIdCount = 0;
 function submitGroupId() {
   return new Promise(resolve => {
     $.get(taskUrl(`user/GatherForture`), async (err, resp, g_data) => {
@@ -723,6 +724,8 @@ function submitGroupId() {
         if(!strGroupId) {
           const status = await openGroup();
           if(status === 0) {
+            if((submitGroupIdCount++) > 15)
+              return resolve();
             await submitGroupId();
           } else {
             resolve();
@@ -761,9 +764,9 @@ function openGroup() {
   return new Promise( async (resolve) => {
     $.get(taskUrl(`user/OpenGroup`, `dwIsNewUser=${$.info.dwIsNewUser}`), async (err, resp, data) => {
       try {
-        const { sErrMsg } = JSON.parse(data);
+        const { sErrMsg, iRet } = JSON.parse(data);
         $.log(`\n【🏝寻宝大作战】${sErrMsg}\n${$.showLog ? data : ''}`);
-        resolve(0);
+        resolve(iRet === 2029 ? undefined : 0);
       } catch (e) {
         $.logErr(e, resp);
       } finally {
