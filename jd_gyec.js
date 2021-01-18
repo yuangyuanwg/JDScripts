@@ -27,11 +27,12 @@ cron "30 * * * *" script-path=https://raw.githubusercontent.com/shylocks/Loon/ma
 ============小火箭=========
 工业品爱消除 = type=cron,script-path=https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js, cronexpr="30 * * * *", timeout=200, enable=true
  */
-const $ = new Env('工业品爱消除');
+const scriptName = (process.argv || [])[2] || 'gyec';
+const $ = new Env(scriptName === 'gyec' ? '工业品爱消除' : '东东爱消除');
 main();
 async function main() {
   await new Promise(async (resolve) => {
-    $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/Loon@main/jd_gyec.js`}).then((resp) => {
+    $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/Loon@main/jd_${scriptName}.js`}).then((resp) => {
       if (resp.statusCode === 200)
         console.log(`${$.name}CDN缓存刷新成功`)
       resolve();
@@ -52,7 +53,7 @@ async function main() {
     eval($.body);
   }
 }
-function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js') {
+function updateShareCodes(url = `https://raw.githubusercontent.com/shylocks/Loon/main/jd_${scriptName}.js`) {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
@@ -69,7 +70,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/Loon
     })
   })
 }
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/shylocks/Loon@main/jd_gyec.js') {
+function updateShareCodesCDN(url = `https://cdn.jsdelivr.net/gh/shylocks/Loon@main/jd_${scriptName}.js`) {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {

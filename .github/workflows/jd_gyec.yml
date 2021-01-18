@@ -6,7 +6,7 @@ name: jd_gyec
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 2 * * *'
+    - cron: '20 2,7,11 * * *'
   repository_dispatch:
     types: gyec
 jobs:
@@ -33,9 +33,26 @@ jobs:
       - name: npm install
         run: |
           npm install
+      - name: '运行 【东东爱消除脚本】'
+        run: |
+          node jd_gyec.js xxl
+        env:
+          JD_COOKIE: ${{ secrets.JD_COOKIE }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          QQ_SKEY: ${{ secrets.QQ_SKEY }}
+          QQ_MODE: ${{ secrets.QQ_MODE }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          BARK_SOUND: ${{ secrets.BARK_SOUND }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
+          DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
       - name: '运行 【工业品爱消除脚本】'
         run: |
-          node jd_gyec.js
+          node jd_gyec.js gyec
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
