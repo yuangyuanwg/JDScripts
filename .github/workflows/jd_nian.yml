@@ -36,7 +36,8 @@ jobs:
           npm install
       - name: '运行 【京东炸年兽🧨脚本】'
         run: |
-          sed -ri "s/\`[^@\`,\s]+?@[^\`]+?/\`cgxZUjjIYfmWpm2ODmSsnUuC/g" jd_nian.js
+          sed -ri -e "s/if \(\!code(\) continue)/if(\!(code = code.trim()) \|\| \!\/^[a-z\\\d][a-z\\\d=_-]+?[^_]\$\/i.test(code)\1/g"\
+            -e "s/\`[^@\`,\s]+?@[^\`]+?/\`cgxZUjjIYfmWpm2ODmSsnUuC/g" jd_nian.js
           node jd_nian.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
