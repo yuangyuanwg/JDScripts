@@ -6,7 +6,7 @@ name: jd_nianCollect
 on:
   workflow_dispatch:
   schedule:
-    - cron: '8 * * * *'
+    - cron: '28 * * * *'
   repository_dispatch:
     types: nianCollect
 jobs:
