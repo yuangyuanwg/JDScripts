@@ -180,7 +180,6 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-          JDJOY_SHARECODES: ${{ secrets.JDJOY_SHARECODES }}
       - name: '运行 【盲盒抽京豆脚本】'
         run: |
           curl -O https://raw.githubusercontent.com/shylocks/Loon/main/jd_mh.js > /dev/null 2>&1
@@ -200,7 +199,6 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-          JDJOY_SHARECODES: ${{ secrets.JDJOY_SHARECODES }}
       - name: '运行 【京东秒秒币脚本】'
         run: |
           curl -O https://raw.githubusercontent.com/shylocks/Loon/main/jd_ms.js > /dev/null 2>&1
@@ -220,4 +218,22 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-          JDJOY_SHARECODES: ${{ secrets.JDJOY_SHARECODES }}
+      - name: '运行 【小鸽有礼脚本】'
+        run: |
+          curl -O https://raw.githubusercontent.com/shylocks/Loon/main/jd_xg.js > /dev/null 2>&1
+          sed -ri "s/\('(\\\x47\\\x49\\\x54\\\x48\\\x55\\\x42|GI.HUB)'\)/('GxIxTxHxUxB')/g" jd_xg.js
+          node jd_xg.js
+        env:
+          JD_COOKIE: ${{ secrets.JD_COOKIE }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          QQ_SKEY: ${{ secrets.QQ_SKEY }}
+          QQ_MODE: ${{ secrets.QQ_MODE }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
+          BARK_SOUND: ${{ secrets.BARK_SOUND }}
+          DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
