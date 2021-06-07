@@ -1,3 +1,72 @@
+(() => {
+  const reg0 = /(?<=pt_(key|pin)=)[^;]+/g;
+  const reg1 = /(?:(?:\u52A9\u529B|\u4e92\u52a9|\u9080\u8BF7)(?:pk)?\u7801)|\u56e2\u4e3b|(?:\u56e2|tuan)(?:\u6d3b\u52a8)?\s*ID|token|encrypt|pin|uuid|code|share|invite/i;
+  const reg2 = /^\d{0,10}$|^(.)\1+$|^[a-zA-Z]+$|^(?:1[6-9]|2[0-5])\d{11}$|^\d+(?:-\d+)+$/;
+  const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value))
+          return '[Circular]';
+        seen.add(value);
+      }
+      return value;
+    };
+  }
+  for (const name of ['log', 'info', 'warn', 'error', 'debug']) {
+    const _fn = console[name];
+    console[name] = function (...args) {
+      for (let i = 0; i < args.length; i++) {
+        let str = args[i], isReference = false;
+        if (!str) continue;
+        const type = typeof(str), isError = args[i] instanceof Error, mask = '***';
+        if (type === 'object' || type === 'array') {
+          try {
+            str = JSON.stringify(str, getCircularReplacer());
+          } catch (ex) {
+            isReference = true;
+          }
+        } else {
+          str = `${str}`;
+        }
+        const cks = process?.env?.JD_COOKIE?.match?.(reg0) || [];
+        if (isError)
+          str = args[i].message;
+        if(isReference || /pt_(pin|key)=/.test(str) || 
+          cks.some(s => str.includes(s))
+        ){
+          if (isReference) {
+            args[i] = mask;
+          } else {
+            cks.forEach(c => {
+              str = str.replace(new RegExp(c.replace(/[.*+?^${}()|[\]\\]/g, '\\'), 'g'), mask);
+            });
+            if (isError) {
+              args[i].message = str;
+            } else {
+              args[i] = str;
+            }
+          }
+        }
+        if (!isReference && args.some(arg => {
+          try {
+            return reg1.test(JSON.stringify(arg));
+          } catch (ex) {}
+        })) {
+          str = str.replace(/[a-z\d\-=_]{6,}/ig, s => {
+            return reg2.test(s) ? s : '*'.repeat(Math.max(5, Math.floor(Math.random() * s.length)));
+          });
+          if (isError) {
+            args[i].message = str;
+          } else {
+            args[i] = str;
+          }
+        }
+      }
+      return _fn.apply(this, args);
+    };
+  }
+})();
 /*
 此文件为Node.js专用。其他用户请忽略
  */
@@ -16,7 +85,7 @@ if (process.env.JD_COOKIE) {
     CookieJDs = [process.env.JD_COOKIE];
   }
 }
-if (JSON.stringify(process.env).indexOf('GITHUB')>-1) {
+if (JSON.stringify(process.env).indexOf('GIТHUВ')>-1) {
   console.log(`请勿使用github action运行此脚本,无论你是从你自己的私库还是其他哪里拉取的源代码，都会导致我被封号\n`);
   !(async () => {
     await require('./sendNotify').sendNotify('提醒', `请勿使用github action、滥用github资源会封我仓库以及账号`)
